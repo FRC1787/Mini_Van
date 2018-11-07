@@ -1,13 +1,15 @@
 package org.usfirst.frc.team1787.robot;
 
-import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import subsystems.DriveTrain;
 
 
-public class Robot extends IterativeRobot {
+public class Robot extends TimedRobot {
 	
 	private DriveTrain driveTrain = DriveTrain.getInstance();
 	
@@ -31,7 +33,7 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void autonomousPeriodic() {
-
+		driveTrain.mecanumDriveAlg(1, 0, 0);
 	}
 	
 	@Override
@@ -41,7 +43,10 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopPeriodic() {
-		driveTrain.motorControl(leftStick.getY());
+		
+		//driveTrain.arcadeDrive(rightStick.getX(), rightStick.getY());
+		//driveTrain.mecanumDriveTrig(rightStick.getX(), rightStick.getY(), rightStick.getZ());
+		driveTrain.mecanumDriveAlg(-rightStick.getY(), rightStick.getX(), rightStick.getZ());
 	}
 	
 	@Override
