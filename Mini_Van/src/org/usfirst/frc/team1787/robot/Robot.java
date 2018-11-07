@@ -18,8 +18,6 @@ public class Robot extends TimedRobot {
 	private final int LEFT_JOYSTICK_ID = 1;
 	private Joystick rightStick = new Joystick(RIGHT_JOYSTICK_ID);
 	private Joystick leftStick = new Joystick(LEFT_JOYSTICK_ID);
-	private int JOYSTICK_ROTATION_AXIS = 2;
-	private int JOYSTICK_SLIDER_AXIS = 3;
 	
 	@Override
 	public void robotInit() {
