@@ -79,7 +79,7 @@ public class DriveTrain extends TimedRobot
 	
 	public void mecanumDriveTrig(double speedAxis, double strafeAxis, double turnAxis) {
 		r = Math.hypot(speedAxis, turnAxis);
-		robotAngle = Math.atan2(turnAxis, speedAxis) - Math.PI / 4;
+		robotAngle = Math.atan2(turnAxis, speedAxis) - (Math.PI / 4);
 		
 		speedLF = r * Math.cos(robotAngle) + turnAxis;
 		speedLR = r * Math.sin(robotAngle) - turnAxis;
@@ -94,13 +94,15 @@ public class DriveTrain extends TimedRobot
 	
 	
 	public void mecanumDriveTrig2(double speedAxis, double strafeAxis, double turnAxis) {
-		r = Math.hypot(speedAxis, turnAxis);
-		robotAngle = Math.atan2(turnAxis, speedAxis) - Math.PI / 4;
+		//Maybe the better drive algorithm
 		
-		speedLF = r * Math.cos(robotAngle) + turnAxis;
-		speedLR = r * Math.sin(robotAngle) - turnAxis;
-		speedRF = r * Math.sin(robotAngle) + turnAxis;
-		speedRR = r * Math.cos(robotAngle) - turnAxis;
+		///r = Math.hypot(speedAxis, turnAxis);
+		robotAngle = turnAxis - Math.PI / 4;
+		
+		speedLF = speedAxis * Math.sin(robotAngle) + strafeAxis;
+		speedLR = speedAxis * Math.cos(robotAngle) + strafeAxis;
+		speedRF = speedAxis * Math.cos(robotAngle) - strafeAxis;
+		speedRR = speedAxis * Math.sin(robotAngle) - strafeAxis;
 		
 		leftFront.set(truncateMotorOutput(speedLF));
 		leftRear.set(truncateMotorOutput(speedLR));
@@ -110,7 +112,7 @@ public class DriveTrain extends TimedRobot
 	
 	public void mecanumDriveAlg(double forward, double strafe, double rotate) {
 		speedLF = truncateMotorOutput(forward + strafe + rotate);
-		speedLR = truncateMotorOutput(forward + strafe + rotate);
+		speedLR = truncateMotorOutput(forward - strafe + rotate);
 		speedRF = truncateMotorOutput(-forward + strafe + rotate);
 		speedRR = truncateMotorOutput(-forward - strafe + rotate);
 		
